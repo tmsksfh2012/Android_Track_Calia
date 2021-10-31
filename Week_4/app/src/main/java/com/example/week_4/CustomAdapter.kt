@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import com.example.week_4.databinding.ListviewItemBinding
 
 class CustomAdapter(context:Context, private val cardArrayList: ArrayList<Card>):BaseAdapter() {
-    val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    private val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     lateinit var binding:ListviewItemBinding
 
@@ -18,6 +19,10 @@ class CustomAdapter(context:Context, private val cardArrayList: ArrayList<Card>)
     override fun getItemId(position: Int): Long =position.toLong()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view=position
+        binding = ListviewItemBinding.inflate(inflater, parent, false)
+        binding.nameListviewItem.text = cardArrayList[position].name
+        binding.contextListviewItem.text=cardArrayList[position].contents
+
+        return binding.root
     }
 }
